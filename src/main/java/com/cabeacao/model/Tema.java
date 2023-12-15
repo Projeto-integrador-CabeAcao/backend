@@ -27,7 +27,7 @@ public class Tema {
 	
 	@NotNull(message = "O Atributo disponivel é obrigatório")
 	@Column(columnDefinition="tinyint(1) default 1")
-	private boolean disponivel;		
+	private boolean disponivel = true;		
 	
 	
 	@NotBlank(message = "O Atributo Descrição é obrigatório")
