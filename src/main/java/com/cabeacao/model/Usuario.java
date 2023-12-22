@@ -1,6 +1,7 @@
 package com.cabeacao.model;
 
 
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,18 +40,22 @@ public class Usuario {
 	
 	
 	@NotBlank(message = "O Atributo senha é obrigatório")
+
 	@Size(min = 8,message = "A senha precisa ter no minimo 8" )
+
 	private String senha;
 	
 	@NotNull
 	private String foto;
 	
+
 	@NotNull(message = "O Atributo data é obrigatório")
 	private LocalDate dataNascimento;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+
 		
 
 	public Long getId() {
@@ -91,6 +97,7 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
