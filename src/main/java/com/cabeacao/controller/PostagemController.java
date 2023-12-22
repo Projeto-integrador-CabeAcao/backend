@@ -18,61 +18,58 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.cabeacao.model.Tema;
-import com.cabeacao.repository.TemaRepository;
+import com.cabeacao.model.Postagem;
+import com.cabeacao.repository.PostagemRepository;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tema")
-@CrossOrigin(origins = "*",allowedHeaders="*")//Duvida
-public class TemaController {
-	@Autowired//Inversão de dependencia
-	private TemaRepository temaRepository;
+@RequestMapping("/postagem")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
+
+public class PostagemController {
+	@Autowired //inversão de dependecia
+	private PostagemRepository postagemRepository;
 	
 	@GetMapping// listar todos
-	public ResponseEntity <List<Tema>>getAll(){
-		return ResponseEntity.ok(temaRepository.findAll());
+	public ResponseEntity <List<Postagem>> getAll(){
+		return ResponseEntity.ok(postagemRepository.findAll());
 	}
 	
-	@GetMapping("/{id}")// listar por id
-	public ResponseEntity <Tema>getByid(@PathVariable Long id){
-		return temaRepository.findById(id)
-			.map(resp -> ResponseEntity.ok(resp))
-			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	@GetMapping("/{id}") //puxa por ID
+	public ResponseEntity<Postagem>getById(@PathVariable Long id){
+		return postagemRepository.findById(id)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	@GetMapping("/nome/{nome}")//listar por nome
-		public ResponseEntity<List<Tema>> getByNome(@PathVariable String nome){ //Duvida List e encurtar o nome
-		return ResponseEntity.ok(temaRepository.findAllByNomeContainingIgnoreCase(nome));			
+	@GetMapping("/materia/{materia}")
+	public ResponseEntity<List<Postagem>> getByNome(@PathVariable String materia){ 
+		return ResponseEntity.ok(postagemRepository.findAllByMateriaContainingIgnoreCase(materia));			
 	}
-		
 	
-	@PostMapping //cadastrar
-	public ResponseEntity<Tema> post(@Valid @RequestBody Tema tema){
+	@PostMapping// cadastrar
+	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem postagem){
 		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(temaRepository.save(tema));
+				.body(postagemRepository.save(postagem));
 	}
-	
+
 	@PutMapping//Atualizar
-	public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema){
-		return temaRepository.findById(tema.getId())
+	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem postagem){
+		return postagemRepository.findById(postagem.getId())
 				.map(resp -> ResponseEntity.status(HttpStatus.CREATED)
-						.body(temaRepository.save(tema)))
+						.body(postagemRepository.save(postagem)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());			
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		Optional<Tema> tema = temaRepository.findById(id);
+		Optional<Postagem> postagem = postagemRepository.findById(id);
 		
-		if(tema.isEmpty())
+		if(postagem.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		temaRepository.deleteById(id);
+		postagemRepository.deleteById(id);
 	}
-
-	
-
 	
 }
