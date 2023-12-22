@@ -1,6 +1,6 @@
 package com.cabeacao.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class UsuarioLogin {
 	
@@ -10,7 +10,7 @@ public class UsuarioLogin {
 	private String senha;
 	private String foto;
 	private String token;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 
 	public Long getId() {
 		return this.id;
@@ -60,11 +60,11 @@ public class UsuarioLogin {
 		this.token = token;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	
