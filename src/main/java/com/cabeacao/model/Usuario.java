@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O Atributo usuario é obrigatório")
 	@Size(max = 50, message = "O usuario precisa ter no maximo 50" )
 	@Column (length = 50)
