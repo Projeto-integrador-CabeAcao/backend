@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -22,12 +23,12 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "O Atributo materia é obrigatório")
+	@NotBlank(message = "O campo materia é obrigatório")
 	@Size(min = 4, max = 100, message = "A materia precisa ter no minimo 4 caracteres e no maximo 99")
 	@Column(length = 100)
 	private String materia;
 
-	@NotBlank(message = "O Atributo titulo é obrigatório")
+	@NotBlank(message = "O campo titulo é obrigatório")
 	@Size(min = 2, max = 100, message = "O titulo precisa ter no minimo 2 caracteres e no maximo 30")
 	@Column(length = 100)
 	private String titulo;
@@ -35,9 +36,12 @@ public class Postagem {
 	@Size(min = 5, max = 3000, message = "O texto precisa ter no minimo 1 caracteres e no maximo 3000")
 	@Column(length = 3000)
 	private String texto;
-	// Como definir min e max de links
-	@Column(length = 250)
+	
+	
 	private String midia;
+	
+	@NotNull(message = "O campo disponivel é obrigatório")
+	private boolean disponivel = true;	
 
 	@Column
 	private LocalDateTime data = LocalDateTime.now();
@@ -53,6 +57,14 @@ public class Postagem {
 
 	public Long getId() {
 		return id;
+	}
+
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 
 	public void setId(Long id) {

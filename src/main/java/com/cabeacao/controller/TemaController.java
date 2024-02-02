@@ -42,9 +42,9 @@ public class TemaController {
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
-	@GetMapping("/nome/{nome}")//listar por nome
-		public ResponseEntity<List<Tema>> getByNome(@PathVariable String nome){ //Duvida List e encurtar o nome
-		return ResponseEntity.ok(temaRepository.findAllByNomeContainingIgnoreCase(nome));			
+	@GetMapping("/disciplina/{disciplina}")//listar por disciplina
+		public ResponseEntity<List<Tema>> getByDisciplina(@PathVariable String disciplina){
+		return ResponseEntity.ok(temaRepository.findAllByDisciplinaContainingIgnoreCase(disciplina));			
 	}
 		
 	

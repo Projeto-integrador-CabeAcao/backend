@@ -27,20 +27,19 @@ public class Tema {
 	//long == BigInt
 	
 	
-	@NotBlank(message = "O Atributo nome é obrigatório")
-	@Size(min = 5, max = 100, message = "O nome precisa ter no minimo 5 caracteres e no maximo 100" )
+	@NotBlank(message = "O campo disciplina é obrigatório")
+	@Size(min = 1, max = 100, message = "A disciplina precisa ter no minimo 1 caracteres e no maximo 100" )
 	@Column (length = 100)
-	private String nome;
+	private String disciplina;
 	
-	//@Column(columnDefinition="tinyint(1) default 1")
-	@NotNull(message = "O Atributo disponivel é obrigatório")
-	private boolean disponivel = true;		
-	
-	
-	@NotBlank(message = "O Atributo Descrição é obrigatório")
+		
+	@NotBlank(message = "O campo Descrição é obrigatório")
 	@Size(min = 10, max = 500, message = "A descrição precisa ter no minimo 5 caracteres e no maximo 500" )
 	@Column (length = 500)
 	private String descricao;
+	
+	
+	private String link;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tema",cascade  = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
@@ -62,21 +61,14 @@ public class Tema {
 		this.descricao = descricao;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDisciplina() {
+		return disciplina;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
 	}
-
-	public boolean isDisponivel() {
-		return disponivel;
-	}
-
-	public void setDisponivel(boolean disponivel) {
-		this.disponivel = disponivel;
-	}
+	
 
 	public List<Postagem> getPostagem() {
 		return postagem;
@@ -84,6 +76,14 @@ public class Tema {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 	
 	
