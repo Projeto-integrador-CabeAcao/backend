@@ -43,9 +43,9 @@ public class Postagem {
 	@NotNull(message = "O campo disponivel é obrigatório")
 	private boolean disponivel = true;	
 
-	@Column
-	private LocalDateTime data = LocalDateTime.now();
-
+	@UpdateTimestamp
+	private LocalDateTime data;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
